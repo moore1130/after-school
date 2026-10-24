@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#262b44">
+  <meta name="description" content="AFTER SCHOOL — a cozy interactive story about one student, one afternoon, and the choices that fill it.">
+  <title>AFTER SCHOOL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Pixelify+Sans:wght@500;600;700&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="game" class="game-shell scene-title">
+    <section class="game-stage" aria-live="polite">
+      <div class="scene-art" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <button class="brand" id="mapButton" type="button" aria-label="Return to campus map">
+          <span class="micro">HORIZON SECONDARY</span>
+          <strong>AFTER SCHOOL</strong>
+        </button>
+
+        <div class="time-block" id="timeBlock" hidden>
+          <span>MONDAY</span>
+          <strong id="clock">3:40 PM</strong>
+        </div>
+
+        <div class="top-actions">
+          <button class="utility-button" id="journalButton" type="button" hidden>JOURNAL</button>
+          <button class="utility-button" id="soundButton" type="button" aria-pressed="false">SOUND OFF</button>
+        </div>
+      </header>
+
+      <aside class="status-panel hud-rail" id="statusPanel" hidden aria-label="Player status">
+        <button class="status-toggle" id="statusToggle" type="button" aria-expanded="true" aria-controls="statusMetrics">
+          <span>STATUS</span><b aria-hidden="true">−</b>
+        </button>
+        <div class="status-metrics" id="statusMetrics">
+          <div class="hud-time"><span>TIME</span><strong id="hudClock">3:40 PM</strong><small id="hudRemaining">360 min remaining</small></div>
+          <div class="status-item energy"><span>ENERGY · <em id="energyState">FOCUSED</em></span><div role="progressbar" aria-label="Energy" aria-valuemin="0" aria-valuemax="100"><i id="energyBar"></i></div><b id="energyValue">70</b></div>
+          <div class="status-item literacy"><span>AI LITERACY</span><div role="progressbar" aria-label="AI Literacy" aria-valuemin="0" aria-valuemax="100"><i id="literacyBar"></i></div><b id="literacyValue">40</b></div>
+          <div class="status-item project"><span>ASSIGNMENT</span><div role="progressbar" aria-label="Assignment progress" aria-valuemin="0" aria-valuemax="100"><i id="projectBar"></i></div><b id="projectValue">10</b></div>
+          <div class="hud-relationships"><span>MAYA <b id="mayaValue">50</b></span><span>JAY <b id="jayValue">50</b></span></div>
+          <section class="conflict-hud" id="conflictHud" aria-live="polite">
+            <span>ACTIVE PRESSURE</span>
+            <strong id="conflictLabel">LOW</strong>
+            <small id="conflictHint">No urgent conflict.</small>
+          </section>
+          <section class="ai-session-panel" id="aiSessionPanel" aria-live="polite">
+            <div class="ai-session-head"><span>A.I.D.E. SESSION</span><b id="tipJournalCount">0 TIPS</b></div>
+            <strong id="aiSessionStatus">A.I.D.E. · STANDBY</strong>
+            <div class="ai-progress" id="aiProgressTrack" hidden role="progressbar" aria-label="A.I.D.E. task progress" aria-valuemin="0" aria-valuemax="100"><i id="aiProgressBar"></i></div>
+            <small id="aiSessionStep">Choose a learning task to begin.</small>
+          </section>
+        </div>
+      </aside>
+
+      <aside class="npc-hud" id="npcHud" hidden aria-label="Friends and recent mood">
+        <button class="npc-status" id="mayaStatus" type="button" aria-label="View Maya's relationship and recent memories">
+          <span class="npc-mini-avatar character-art portrait-maya" aria-hidden="true"></span>
+          <span><strong>MAYA</strong><small id="mayaMoodLabel">STEADY</small><i><b id="mayaMoodBar"></b></i></span>
+        </button>
+        <button class="npc-status" id="jayStatus" type="button" aria-label="View Jay's relationship and recent memories">
+          <span class="npc-mini-avatar character-art portrait-jay" aria-hidden="true"></span>
+          <span><strong>JAY</strong><small id="jayMoodLabel">STEADY</small><i><b id="jayMoodBar"></b></i></span>
+        </button>
+      </aside>
+
+      <section id="screen" class="screen"></section>
+
+      <footer class="stage-footer">
+        <p id="taskLine">A scripted interactive prototype. No live AI is used.</p>
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      </footer>
+    </section>
+  </main>
+
+  <dialog id="journalDialog" class="journal-dialog">
+    <div class="dialog-head">
+      <div><span class="micro">THIS WEEK'S TRACE</span><h2>Journal</h2></div>
+      <button class="utility-button" id="closeJournal" type="button">CLOSE</button>
+    </div>
+    <div id="journalContent" class="journal-content"></div>
+  </dialog>
+
+  <dialog id="phoneDialog" class="phone-dialog">
+    <div class="phone-shell">
+      <div class="phone-head"><span>MESSAGES</span><strong id="phoneClock">3:40</strong></div>
+      <div id="phoneContent" class="phone-content"></div>
+      <button class="phone-home" id="closePhone" type="button" aria-label="Close phone"></button>
+    </div>
+  </dialog>
+
+  <dialog id="npcDialog" class="npc-dialog">
+    <div class="dialog-head">
+      <div><span class="micro">RELATIONSHIP MEMORY</span><h2 id="npcDialogTitle">Maya</h2></div>
+      <button class="utility-button" id="closeNpcDialog" type="button">CLOSE</button>
+    </div>
+    <div id="npcDialogContent" class="journal-content"></div>
+  </dialog>
+
+  <script src="content.js"></script>
+  <script src="narrative.js"></script>
+  <script src="state.js"></script>
+  <script src="systems.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
